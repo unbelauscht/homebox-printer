@@ -1,0 +1,23 @@
+[Unit]
+Description=Homebox Label Printer API
+After=network.target
+
+[Service]
+Type=simple
+User=homebox-printer
+Group=nogroup
+ExecStart=/usr/local/bin/homebox-printer
+Restart=on-failure
+RestartSec=5s
+
+Environment=PRINTER=your_printer_name
+Environment=BIND=:8080
+Environment=SECRET=your_secret_value
+
+# Logging
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=homebox-printer
+
+[Install]
+WantedBy=multi-user.target
